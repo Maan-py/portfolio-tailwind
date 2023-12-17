@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 .navbar-fixed {
-  @apply fixed z-[9999] bg-white bg-opacity-70 backdrop-blur-sm;
+  @apply fixed z-[9999] bg-white bg-opacity-70 backdrop-blur-sm dark:bg-dark;
   box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
 }
 
-
 .hamburger {
-  @apply w-[30px] h-[2px] my-2 block bg-dark;
+  @apply w-[30px] h-[2px] my-2 block bg-dark dark:bg-white;
 }
 
 .hamburger-active > span:nth-child(1) {
@@ -22,4 +21,8 @@
 
 .hamburger-active > span:nth-child(3) {
   @apply origin-bottom-left -rotate-45;
+}
+
+.sec-text:before {
+  @apply dark:bg-dark;
 }

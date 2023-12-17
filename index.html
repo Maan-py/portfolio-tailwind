@@ -1,467 +1,566 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maan Portfolio</title>
-    <link rel="stylesheet" href="./dist/output.css" />
-    <style>
-      .text {
-        position: relative;
-      }
 
-      .sec-text:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background-color: white;
-        animation: animate 4s steps(12) infinite;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maan Portfolio</title>
+  <link rel="stylesheet" href="./dist/output.css" />
+  <link rel="stylesheet" href="./src/style.css">
+  <script>
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
+</head>
 
-      @keyframes animate {
-        40%,
-        60% {
-          left: 100%;
-        }
-
-        100% {
-          left: 0%;
-        }
-      }
-    </style>
-  </head>
-  <body class="overflow-x-hidden">
-    <!-- Header Start -->
-    <header class="absolute top-0 left-0 z-10 flex w-full h-[60px] items-center bg-transparent pt-5">
-      <div class="container">
-        <div class="flex items-center justify-between relative">
-          <div class="px-4">
-            <a href="#toggle-dark" class="py-4"></a>
-          </div>
-          <div class="flex items-center">
-            <button id="hamburger" name="hamburger" class="block absolute right-4 lg:hidden">
-              <span class="hamburger transition duration-300 ease-in-out origin-top-left"></span>
-              <span class="hamburger transition duration-300 ease-in-out"></span>
-              <span class="hamburger transition duration-300 ease-in-out origin-bottom-left"></span>
-            </button>
-            <nav id="nav-menu" class="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-[15px] lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
-              <ul class="block lg:flex">
-                <li class="group">
-                  <a href="#home" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Home</a>
-                </li>
-                <li class="group">
-                  <a href="#about" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">About</a>
-                </li>
-                <li class="group">
-                  <a href="#project" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Projects</a>
-                </li>
-                <li class="group">
-                  <a href="#contact" class="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Contact</a>
-                </li>
-              </ul>
-            </nav>
+<body class="overflow-x-hidden">
+  <!-- Header Start -->
+  <header class="absolute top-0 left-0 z-10 flex w-full h-[60px] items-center bg-transparent pt-5">
+    <div class="container">
+      <div class="flex items-center justify-between relative">
+        <div class="px-4">
+          <a href="#toggle-dark" class="py-4"></a>
+        </div>
+        <div class="flex items-center pb-5">
+          <button id="hamburger" name="hamburger" class="block absolute right-4 lg:hidden">
+            <span class="hamburger transition duration-300 ease-in-out origin-top-left"></span>
+            <span class="hamburger transition duration-300 ease-in-out"></span>
+            <span class="hamburger transition duration-300 ease-in-out origin-bottom-left"></span>
+          </button>
+          <nav id="nav-menu"
+            class="hidden absolute pb-2 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-[15px] lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none opacity-85 shadow-slate-500 dark:bg-dark">
+            <ul class="block lg:flex">
+              <li class="group">
+                <a href="#home"
+                  class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">Home</a>
+              </li>
+              <li class="group">
+                <a href="#about"
+                  class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">About</a>
+              </li>
+              <li class="group">
+                <a href="#project"
+                  class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">Projects</a>
+              </li>
+              <li class="group">
+                <a href="#contact"
+                  class="text-base text-dark py-2 mx-8 flex group-hover:text-primary dark:text-white">Contact</a>
+              </li>
+              <!-- Dark mode button -->
+              <li class="flex items-center pl-8">
+                <label class="theme-switch">
+                  <input type="checkbox" class="theme-switch__checkbox">
+                  <div class="theme-switch__container">
+                    <div class="theme-switch__clouds"></div>
+                    <div class="theme-switch__stars-container">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 55" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z"
+                          fill="currentColor"></path>
+                      </svg>
+                    </div>
+                    <div class="theme-switch__circle-container">
+                      <div class="theme-switch__sun-moon-container">
+                        <div class="theme-switch__moon">
+                          <div class="theme-switch__spot"></div>
+                          <div class="theme-switch__spot"></div>
+                          <div class="theme-switch__spot"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Header End -->
+  <!-- Hero Section Start -->
+  <section id="home" class="pt-32 dark:bg-dark h-screen">
+    <div class="container">
+      <div
+        class="flex flex-wrap relative items-center sm:relative sm:bottom-[7rem] md:-top-[6rem] md:left-5 lg:relative lg:-top-[15rem] lg:bottom-[10rem] lg:ml-[7rem]">
+        <div class="w-full self-center px-4 order-2 lg:ml-48">
+          <h1 class="text-base font-semibold text-primary md:text-2xl lg:text-3xl">Hello, Guys! <span class="wave">👋</span> <span
+              class="block font-bold text-dark text-xl mt-1 lg:text-2xl dark:text-white">I'm Muhammad Luqmaan</span>
+          </h1>
+          <h2 class="font-medium text-secondary text-lg mb-5"><span
+              class="text sec-text bg-gradient-to-r text-transparent from-blue-500 to-teal-400 bg-clip-text lg:text-xl"></span>
+          </h2>
+          <p class="font-medium text-slate-400 mb-10 lg:text-lg">Welcome To My Profile Website.</p>
+          <a href="#contact"
+            class="text-base font-semibold text-white bg-primary py-3 px-8 rounded-full hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out">Contact
+            Me</a>
+        </div>
+        <div class="w-full self-end mb-14 sm:ml-[23rem] lg:ml-[20rem]">
+          <div
+            class="container max-w-full relative order-1 sm:-bottom-[16rem] sm:mt-9 sm:right-0 lg:-bottom-[17rem] lg:mt-9 lg:right-0 md:top-[19rem]">
+            <!--              <img src="dist/img/Luqmaan.jpg" alt="Maan" width="100" class="relative w-48 h-48 md:w-64 md:h-64 lg:w-64 lg:h-64 rounded-full border-4 border-primary mx-auto my-auto" />-->
+            <div class="blob w-48 h-48 md:w-64 md:h-64 lg:w-64 lg:h-64"></div>
           </div>
         </div>
       </div>
-    </header>
-    <!-- Header End -->
-    <!-- Hero Section Start -->
-    <section id="home" class="pt-32">
-      <div class="container">
-        <div class="flex flex-wrap relative items-center sm:relative sm:bottom-[7rem] md:-top-[6rem] md:left-5 lg:relative lg:bottom-[10rem] lg:ml-[7rem]">
-          <div class="w-full self-center px-4 order-2 lg:ml-11">
-            <h1 class="text-base font-semibold text-primary md:text-2xl lg:text-3xl">Hello, Guys! 👋<span class="block font-bold text-dark text-xl mt-1 lg:text-2xl">I'm Muhammad Luqmaan</span></h1>
-            <h2 class="font-medium text-secondary text-lg mb-5"><span class="text sec-text bg-gradient-to-r text-transparent from-blue-500 to-teal-400 bg-clip-text lg:text-xl"></span></h2>
-            <p class="font-medium text-slate-400 mb-10 lg:text-lg">Welcome To My Profile Website.</p>
-            <a href="#contact" class="text-base font-semibold text-white bg-primary py-3 px-8 rounded-full hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out">Contact Me</a>
-          </div>
-          <div class="w-full self-end mb-12 sm:ml-[23rem] lg:ml-[20rem]">
-            <div class="container max-w-full relative order-1 sm:-bottom-[16rem] sm:mt-9 sm:right-0 lg:-bottom-[17rem] lg:mt-9 lg:right-0 md:top-[19rem]">
-              <img src="dist/img/Maan.jpg" alt="Maan" width="150" class="relative w-48 h-48 md:w-64 md:h-64 lg:w-64 lg:h-64 rounded-full border-4 border-primary mx-auto my-auto" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Hero Section End -->
+    </div>
+  </section>
+  <!-- Hero Section End -->
 
-    <!-- About Section Start -->
-    <section id="about" class="pt-36 pb-[20rem]">
-      <div class="container">
-        <div class="flex flex-wrap">
-          <div class="w-full px-4 mb-10">
-            <h4 class="font-bold uppercase text-primary text-lg mb-3">About Me</h4>
-            <h2 class="font-bold text-dark text-3xl mb-5"></h2>
-            <p class="font-medium text-base text-secondary lg:text-lg mb-3">Hey, I'm Muhammad Luqmaan! Welcome to my corner on the internet.</p>
-            <p class="font-medium text-base text-secondary lg:text-lg mb-3">
-              Life, and the world around us is so much bigger and complex than we can ever fully understand. I'm thankful to have found a few areas that I am passionate about, intrigued by and find meaningful.
-            </p>
-            <p class="font-medium text-base text-secondary lg:text-lg mb-3">I'm a beginner Front-end developer, informatics engineer student. I live in Indonesia. I was born in Yogyakarta.</p>
-            <p class="font-medium text-base text-secondary lg:text-lg">
-              I have an interest on programming since last 2 years. I'm a self-taught, I've learned a few technologies from the internet, especially from Youtube. I love computer science because of the ability you gain to be able to see an
-              idea (applicable to any field) through, from start to finish. Check out some of <a href="#project" class="text-primary">my work.</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- About Section End -->
-
-    <!-- Project Section Start -->
-    <section id="project" class="bg-dark pt-36 pb-16">
-      <div class="container">
-        <div class="w-full px-4">
-          <div class="mx-auto mb-16 max-w-xl text-center">
-            <h4 class="mb-2 text-lg font-semibold text-primary">Portfolio</h4>
-            <h2 class="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">My Projects</h2>
-            <p class="text-md font-medium text-secondary md:text-lg">These Are a Few of My Projects that I Made During Learning Programming, Especially Front-end Programming.</p>
-          </div>
-        </div>
-
-        <div class="flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-10/12">
-          <div class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/4.png" alt="Landing Page" width="w-full" />
-            </div>
-            <div class="bg-slate-600 p-3 relative -top-1 rounded-b-md h-[125px]">
-              <div class="flex">
-                <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">Landing Page</h3>
-                <div class="flex">
-                  <a href="https://maanportfolio.vercel.app/" title="Visit" class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px" class="mx-auto">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                    </svg>
-                  </a>
-                  <a href="https://github.com/Maan-py/MyPortfolio" class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center" title="Github">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-                      ></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <p class="text-base text-white">My Landing Page Website Made with Bootstrap.</p>
-            </div>
-          </div>
-
-          <div class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/2.png" alt="Landing Page" width="w-full" />
-            </div>
-            <div class="bg-gray-500 p-3 relative -top-1 rounded-b-md h-[125px]">
-              <div class="flex">
-                <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">My First Portolio</h3>
-                <div class="flex">
-                  <a href="https://github.com/Maan-py/portfolio" title="Visit" class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px" class="mx-auto">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                    </svg>
-                  </a>
-                  <a href="https://github.com/Maan-py/portfolio" class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center" title="Github">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-                      ></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <p class="text-base text-white">My First Ever Portfolio Website that I Made to Learn HTML and CSS.</p>
-            </div>
-          </div>
-
-          <div class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/6.png" alt="Landing Page" width="w-full" />
-            </div>
-            <div class="bg-gray-500 p-3 relative -top-1 rounded-b-md h-[125px]">
-              <div class="flex">
-                <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">Movie Search Web</h3>
-                <div class="flex">
-                  <a href="https://maan-py.github.io/MovieIDCamp/" title="Visit" class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px" class="mx-auto">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                    </svg>
-                  </a>
-                  <a href="https://github.com/Maan-py/MovieIDCamp" class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center" title="Github">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-                      ></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <p class="text-base text-white">Website Using API for Dicoding Final Project.</p>
-            </div>
-          </div>
-
-          <div class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/1.png" alt="Landing Page" width="w-full" />
-            </div>
-            <div class="bg-gray-500 p-3 relative -top-1 rounded-b-md h-[125px]">
-              <div class="flex">
-                <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">Image Gallery</h3>
-                <div class="flex">
-                  <a href="https://maan-py.github.io/imageGallery/" title="Visit" class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px" class="mx-auto">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                    </svg>
-                  </a>
-                  <a href="https://github.com/Maan-py/imageGallery" class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center" title="Github">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-                      ></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <p class="text-base text-white">A Simple Gallery As My Study Case While Learning JS DOM.</p>
-            </div>
-          </div>
-
-          <div class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
-            <div class="overflow-hidden rounded-md shadow-md">
-              <img src="dist/img/portfolio/5.png" alt="Landing Page" width="w-full" />
-            </div>
-            <div class="bg-gray-500 p-3 relative -top-1 rounded-b-md h-[125px]">
-              <div class="flex">
-                <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">Lightbox</h3>
-                <div class="flex">
-                  <a href="maan-py.github.io/gallery/" title="Visit" class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px" class="mx-auto">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
-                    </svg>
-                  </a>
-                  <a href="https://github.com/Maan-py/gallery" class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center" title="Github">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="25px">
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-                      ></path>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <p class="text-base text-white">A Rihlah Memories Gallery.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Project Section End -->
-
-    <!-- Contact Section Start -->
-    <section id="contact" class="pt-36 pb-32">
-      <div class="container">
+  <!-- About Section Start -->
+  <section id="about" class="pt-36 pb-[15rem] dark:bg-slate-800">
+    <div class="container">
+      <div class="flex flex-wrap">
         <div class="w-full px-4 mb-10">
-          <div class="mx-auto mb-16 max-w-xl text-center">
-            <h4 class="mb-4 text-lg font-bold uppercase text-primary">Contact</h4>
-            <h3 class="mb-4 text-3xl font-bold text-dark sm:text-4xl lg:text-5xl">Let's Connect</h3>
-            <p class="font-medium text-base mb-2 text-secondary lg:text-lg">Connection Is the Key to Personal and Career Success. Sometimes, Reaching Out and Taking Someone's Hand Is the Beginning of A Journey</p>
-          </div>
-          <p class="font-medium text-base mb-2 text-secondary lg:text-lg">Connect With Me by Following My Social Media Below :</p>
-          <div class="flex items-center">
-            <!-- Facebook -->
-            <a href="https://web.facebook.com/muhammad.luqmaan.75" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
-              <svg class="fill-current" role="img" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>Facebook</title>
-                <path
-                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                />
-              </svg>
-            </a>
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/muhammad.luqmaan_/" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
-              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>Instagram</title>
-                <path
-                  d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
-                />
-              </svg>
-            </a>
-            <!-- Github -->
-            <a href="https://github.com/Maan-py" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
-              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>GitHub</title>
-                <path
-                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                />
-              </svg>
-            </a>
-            <!-- Discord -->
-            <a href="https://discord.com/invite/5srndgeNa8" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
-              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>Discord</title>
-                <path
-                  d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1252.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
-                />
-              </svg>
-            </a>
-            <!-- Steam -->
-            <a href="https://steamcommunity.com/id/MaanPy/" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
-              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>Steam</title>
-                <path
-                  d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"
-                />
-              </svg>
-            </a>
-          </div>
-          <div class="w-full px-4"></div>
-        </div>
-        <form action="">
-          <div class="w-full lg:w-2/3">
-            <div class="w-full px-4 mb-8">
-              <label for="name" class="text-base text-primary font-bold">Nama</label>
-              <input type="text" id="name" class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary" />
-            </div>
-            <div class="w-full px-4 mb-8">
-              <label for="email" class="text-base text-primary font-bold">Email</label>
-              <input type="text" id="email" class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary" />
-            </div>
-            <div class="w-full px-4 mb-8">
-              <label for="message" class="text-base text-primary font-bold">Message</label>
-              <input type="text" id="message" class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primar h-32" />
-            </div>
-            <div class="w-full">
-              <button class="text-base font-semibold text-white bg-primary py-3 px-8 rounded-lg ml-4 hover:opacity-80 hover:shadow-lg transition duration-500">Send</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </section>
-    <!-- Contact Section End -->
-    <!-- Footer Start -->
-    <footer class="bg-dark pt-24 pb-12">
-      <div class="container">
-        <div class="flex flex-wrap">
-          <div class="mb-12 w-full px-4 font-medium text-slate-300 md:w-1/3">
-            <h3 class="mb-2 text-2xl font-bold">Contact Me</h3>
-            <p>mluqmaan22@gmail.com</p>
-          </div>
-          <div class="mb-12 w-full px-4 md:w-1/3">
-            <h3 class="mb-5 text-xl font-semibold text-white">My Wesbites</h3>
-            <ul class="text-slate-300">
-              <li>
-                <a href="https://maanportfolio.vercel.app/" class="mb-3 inline-block text-base hover:text-primary">Landing Page</a>
-              </li>
-              <li>
-                <a href="https://maan-py.github.io/MovieIDCamp/" class="mb-3 inline-block text-base hover:text-primary">Movie Search Web</a>
-              </li>
-              <li>
-                <a href="https://maan-py.github.io/MyBookshelf/" class="mb-3 inline-block text-base hover:text-primary">Bookshelf</a>
-              </li>
-            </ul>
-          </div>
-          <div class="mb-12 w-full px-4 md:w-1/3">
-            <h3 class="mb-5 text-xl font-semibold text-white">Tautan</h3>
-            <ul class="text-slate-300">
-              <li>
-                <a href="#home" class="mb-3 inline-block text-base hover:text-primary">Home</a>
-              </li>
-              <li>
-                <a href="#about" class="mb-3 inline-block text-base hover:text-primary">About</a>
-              </li>
-              <li>
-                <a href="#project" class="mb-3 inline-block text-base hover:text-primary">Projects</a>
-              </li>
-
-              <li>
-                <a href="#contact" class="mb-3 inline-block text-base hover:text-primary">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="w-full border-t border-slate-700 pt-10">
-          <div class="mb-5 flex items-center justify-center">
-            <!-- Facebook -->
-            <a href="https://web.facebook.com/muhammad.luqmaan.75" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
-              <svg class="fill-current" role="img" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>Facebook</title>
-                <path
-                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                />
-              </svg>
-            </a>
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/muhammad.luqmaan_/" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
-              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>Instagram</title>
-                <path
-                  d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"
-                />
-              </svg>
-            </a>
-            <!-- Github -->
-            <a href="https://github.com/Maan-py" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
-              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>GitHub</title>
-                <path
-                  d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                />
-              </svg>
-            </a>
-            <!-- Discord -->
-            <a href="https://discord.com/invite/5srndgeNa8" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
-              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>Discord</title>
-                <path
-                  d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1252.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
-                />
-              </svg>
-            </a>
-            <!-- Steam -->
-            <a href="https://steamcommunity.com/id/MaanPy/" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
-              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <title>Steam</title>
-                <path
-                  d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"
-                />
-              </svg>
-            </a>
-          </div>
-          <p class="text-center text-xs font-medium text-slate-500">© 2023 <a href="https://www.instagram.com/muhammad.luqmaan_/" target="_blank" class="font-bold text-primary">Muhammad Luqmaan</a> • All Rights Reserved.</p>
+          <h4 class="font-bold uppercase text-primary text-lg mb-3">About Me</h4>
+          <h2 class="font-bold text-dark text-3xl mb-5"></h2>
+          <p class="font-medium text-base text-secondary lg:text-lg mb-3">Hey, I'm Muhammad Luqmaan! Welcome to my
+            corner on the internet.</p>
+          <p class="font-medium text-base text-secondary lg:text-lg mb-3">
+            I'm a computer science student who is passionate about software engineering. I like to challenge myself to
+            learn new things and find creative solutions in every project I work on.
+          </p>
+          <p class="font-medium text-base text-secondary lg:text-lg mb-3">
+            Life, and the world around us is so much bigger and complex than we can ever fully understand. I'm thankful
+            to have found a few areas that I am passionate about, intrigued by and find meaningful.
+          </p>
+          <p class="font-medium text-base text-secondary lg:text-lg mb-3">I'm a beginner Front-end developer,
+            informatics engineer student. I live in Indonesia. I was born in Yogyakarta.</p>
+          <p class="font-medium text-base text-secondary lg:text-lg">
+            I have an interest on programming since when i was in high school. I'm a self-taught, I've learned a few
+            technologies from the internet, especially from Youtube. I love computer science because of the ability you
+            gain to be
+            able to see an idea (applicable to any field) through, from start to finish. Check out some of <a
+              href="#project" class="text-primary">my work.</a>
+          </p>
         </div>
       </div>
-    </footer>
-    <!-- Footer End -->
-    <script>
-      const text = document.querySelector(".sec-text");
+    </div>
+  </section>
+  <!-- About Section End -->
+  <!-- Project Section Start -->
+  <section id="project" class="bg-dark pt-36 pb-16 dark:bg-dark">
+    <div class="container">
+      <div class="w-full px-4">
+        <div class="mx-auto mb-16 max-w-xl text-center">
+          <h4 class="mb-2 text-lg font-semibold text-primary">Portfolio</h4>
+          <h2 class="mb-4 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">My Projects</h2>
+          <p class="text-md font-medium text-secondary md:text-lg">These Are a Few of My Projects that I Made During
+            Learning Programming, Especially Front-end Programming.</p>
+        </div>
+      </div>
+      <div class="flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-10/12">
+        <div
+          class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
+          <div class="overflow-hidden rounded-md shadow-md">
+            <img src="dist/img/portfolio/4.png" alt="Landing Page" width="w-full" />
+          </div>
+          <div class="bg-slate-600 p-3 relative -top-1 rounded-b-md h-[125px]">
+            <div class="flex">
+              <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">Landing Page</h3>
+              <div class="flex">
+                <a href="https://maanportfolio.vercel.app/" title="Visit"
+                  class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px" class="mx-auto">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25">
+                    </path>
+                  </svg>
+                </a>
+                <a href="https://github.com/Maan-py/MyPortfolio"
+                  class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center"
+                  title="Github">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <p class="text-base text-white">My Landing Page Website Made with Bootstrap.</p>
+          </div>
+        </div>
+        <div
+          class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
+          <div class="overflow-hidden rounded-md shadow-md">
+            <img src="dist/img/portfolio/2.png" alt="My First Portfolio" width="w-full" />
+          </div>
+          <div class="bg-gray-500 p-3 relative -top-1 rounded-b-md h-[125px]">
+            <div class="flex">
+              <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">My First Portolio</h3>
+              <div class="flex">
+                <a href="https://github.com/Maan-py/portfolio" title="Visit"
+                  class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px" class="mx-auto">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25">
+                    </path>
+                  </svg>
+                </a>
+                <a href="https://github.com/Maan-py/portfolio"
+                  class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center"
+                  title="Github">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <p class="text-base text-white">My First Ever Portfolio Website that I Made to Learn HTML and CSS.</p>
+          </div>
+        </div>
+        <div
+          class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
+          <div class="overflow-hidden rounded-md shadow-md">
+            <img src="dist/img/portfolio/6.png" alt="Movie Search Web" width="w-full" />
+          </div>
+          <div class="bg-gray-500 p-3 relative -top-1 rounded-b-md h-[125px]">
+            <div class="flex">
+              <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">Movie Search Web</h3>
+              <div class="flex">
+                <a href="https://maan-py.github.io/MovieIDCamp/" title="Visit"
+                  class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px" class="mx-auto">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25">
+                    </path>
+                  </svg>
+                </a>
+                <a href="https://github.com/Maan-py/MovieIDCamp"
+                  class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center"
+                  title="Github">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <p class="text-base text-white">Website Using API for Dicoding Final Project.</p>
+          </div>
+        </div>
+        <div
+          class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
+          <div class="overflow-hidden rounded-md shadow-md">
+            <img src="dist/img/portfolio/1.png" alt="Image Gallery" width="w-full" />
+          </div>
+          <div class="bg-gray-500 p-3 relative -top-1 rounded-b-md h-[125px]">
+            <div class="flex">
+              <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">Image Gallery</h3>
+              <div class="flex">
+                <a href="https://maan-py.github.io/imageGallery/" title="Visit"
+                  class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px" class="mx-auto">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25">
+                    </path>
+                  </svg>
+                </a>
+                <a href="https://github.com/Maan-py/imageGallery"
+                  class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center"
+                  title="Github">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <p class="text-base text-white">A Simple Gallery As My Study Case While Learning JS DOM.</p>
+          </div>
+        </div>
+        <div
+          class="mb-12 p-4 md:w-1/2 grayscale opacity-80 transition duration-500 hover:grayscale-0 hover:opacity-100">
+          <div class="overflow-hidden rounded-md shadow-md">
+            <img src="dist/img/portfolio/5.png" alt="Lightbox" width="w-full" />
+          </div>
+          <div class="bg-gray-500 p-3 relative -top-1 rounded-b-md h-[125px]">
+            <div class="flex">
+              <h3 class="mb-3 text-sm md:text-lg font-bold text-cream w-full">Lightbox</h3>
+              <div class="flex">
+                <a href="maan-py.github.io/gallery/" title="Visit"
+                  class="hover:bg-gray-300 rounded-sm w-[30px] h-[30px] flex content-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px" class="mx-auto">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25">
+                    </path>
+                  </svg>
+                </a>
+                <a href="https://github.com/Maan-py/gallery"
+                  class="ml-2 hover:bg-gray-300 w-[30px] h-[30px] rounded-sm mx-auto flex content-center justify-center"
+                  title="Github">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" width="25px">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <p class="text-base text-white">A Rihlah Memories Gallery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Project Section End -->
+  <!-- Contact Section Start -->
+  <section id="contact" class="pt-36 pb-32 dark:bg-slate-800">
+    <div class="container">
+      <div class="w-full px-4 mb-10">
+        <div class="mx-auto mb-16 max-w-xl text-center">
+          <h4 class="mb-4 text-lg font-bold uppercase text-primary">Contact</h4>
+          <h3 class="mb-4 text-3xl font-bold text-dark sm:text-4xl lg:text-5xl dark:text-white">Let's Connect</h3>
+          <p class="font-medium text-base mb-8 text-secondary lg:text-lg">Connection Is the Key to Personal and Career
+            Success. Sometimes, Reaching Out and Taking Someone's Hand Is the Beginning of A Journey</p>
+          <div class="flex flex-wrap">
+            <p class="font-medium mb-2 text-base text-secondary lg:text-lg text-center w-full">Connect With Me by
+              Following My Social Media Below :
+            </p>
+            <div class="flex w-full justify-center">
+              <!-- Facebook -->
+              <a href="https://web.facebook.com/muhammad.luqmaan.75" target="_blank"
+                class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                <svg class="fill-current dark:text-white" role="img" width="20" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <title>Facebook</title>
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+              </a>
+              <!-- Instagram -->
+              <a href="https://www.instagram.com/muhammad.luqmaan_/" target="_blank"
+                class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                <svg role="img" class="fill-current dark:text-white" width="20" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <title>Instagram</title>
+                  <path
+                    d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+                </svg>
+              </a>
+              <!-- Github -->
+              <a href="https://github.com/Maan-py" target="_blank"
+                class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                <svg role="img" class="fill-current dark:text-white" width="20" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <title>GitHub</title>
+                  <path
+                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                </svg>
+              </a>
+              <!-- Discord -->
+              <!--            <a href="https://discord.com/invite/5srndgeNa8" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">-->
+              <!--              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">-->
+              <!--                <title>Discord</title>-->
+              <!--                <path-->
+              <!--                  d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1252.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />-->
+              <!--              </svg>-->
+              <!--            </a>-->
+              <!-- Steam -->
+              <a href="https://steamcommunity.com/id/MaanPy/" target="_blank"
+                class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                <svg role="img" class="fill-current dark:text-white" width="20" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <title>Steam</title>
+                  <path
+                    d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z" />
+                </svg>
+              </a>
+              <!-- LinkedIn -->
+              <a href="https://linkedin.com/in/muhammadluqmaan" target="_blank"
+                class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border border-slate-300 hover:border-primary hover:bg-primary hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  class="fill-current dark:text-white">
+                  <circle cx="4.983" cy="5.009" r="2.188"></circle>
+                  <path
+                    d="M9.237 8.855v12.139h3.769v-6.003c0-1.584.298-3.118 2.262-3.118 1.937 0 1.961 1.811 1.961 3.218v5.904H21v-6.657c0-3.27-.704-5.783-4.526-5.783-1.835 0-3.065 1.007-3.568 1.96h-.051v-1.66H9.237zm-6.142 0H6.87v12.139H3.095z">
+                  </path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="w-full px-4"></div>
+      </div>
+      <form action="" name="maan-contact-form" class="flex justify-center">
+        <div class="w-full lg:w-2/3">
+          <div class="w-full px-4 mb-8">
+            <label for="name" class="text-base text-primary font-bold">Nama</label>
+            <input type="text" name="name" id="name" required
+              class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary" />
+          </div>
+          <div class="w-full px-4 mb-8">
+            <label for="email" class="text-base text-primary font-bold">Email</label>
+            <input type="email" pattern="[^ @]*@[^ @]*" name="email" id="email" required
+              class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary" />
+          </div>
+          <div class="w-full px-4 mb-8">
+            <label for="message" class="text-base text-primary font-bold">Message</label>
+            <textarea name="message" id="message" required
+              class="w-full bg-slate-200 text-dark p-3 rounded-md focus:outline-none focus:ring-primary focus:ring-1 focus:border-primary h-32"></textarea>
+          </div>
+          <div class="w-full">
+            <button type="submit"
+              class="send-btn btn-kirim text-base font-semibold text-white bg-primary py-3 px-8 rounded-lg ml-4 hover:opacity-80 hover:shadow-lg transition duration-500">Send
+              Message</button>
+            <button disabled type="submit"
+              class="send-btn btn-loading hidden text-base font-semibold text-white bg-primary py-3 px-8 rounded-lg ml-4 hover:opacity-80 hover:shadow-lg transition duration-500 cursor-pointer">
+              <svg aria-hidden="true" role="status" class="inline w-4 h-4 me-3 text-white animate-spin"
+                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="#E5E7EB" />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentColor" />
+              </svg>
+              Loading...
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+  <!-- Contact Section End -->
+  <!-- Footer Start -->
+  <footer class="bg-dark pt-24 pb-12">
+    <div class="container">
+      <div class="flex flex-wrap">
+        <div class="mb-12 w-full px-4 font-medium text-slate-300 md:w-1/3">
+          <h3 class="mb-2 text-2xl font-bold">Contact Me</h3>
+          <p>mluqmaan22@gmail.com</p>
+        </div>
+        <div class="mb-12 w-full px-4 md:w-1/3">
+          <h3 class="mb-5 text-xl font-semibold text-white">My Wesbites</h3>
+          <ul class="text-slate-300">
+            <li>
+              <a href="https://maanportfolio.vercel.app/" class="mb-3 inline-block text-base hover:text-primary">Landing
+                Page</a>
+            </li>
+            <li>
+              <a href="https://maan-py.github.io/MovieIDCamp/"
+                class="mb-3 inline-block text-base hover:text-primary">Movie Search Web</a>
+            </li>
+            <li>
+              <a href="https://maan-py.github.io/MyBookshelf/"
+                class="mb-3 inline-block text-base hover:text-primary">Bookshelf</a>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-12 w-full px-4 md:w-1/3">
+          <h3 class="mb-5 text-xl font-semibold text-white">Links</h3>
+          <ul class="text-slate-300">
+            <li>
+              <a href="#home" class="mb-3 inline-block text-base hover:text-primary">Home</a>
+            </li>
+            <li>
+              <a href="#about" class="mb-3 inline-block text-base hover:text-primary">About</a>
+            </li>
+            <li>
+              <a href="#project" class="mb-3 inline-block text-base hover:text-primary">Projects</a>
+            </li>
 
-      const textLoad = () => {
-        setTimeout(() => {
-          text.textContent = "Informatics Engineer Student";
-        }, 0);
+            <li>
+              <a href="#contact" class="mb-3 inline-block text-base hover:text-primary">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-        setTimeout(() => {
-          text.textContent = "New Learner";
-        }, 4000);
+      <div class="w-full border-t border-slate-700 pt-10">
+        <div class="mb-5 flex items-center justify-center">
+          <!-- Facebook -->
+          <a href="https://web.facebook.com/muhammad.luqmaan.75" target="_blank"
+            class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
+            <svg class="fill-current" role="img" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <title>Facebook</title>
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/muhammad.luqmaan_/" target="_blank"
+            class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
+            <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <title>Instagram</title>
+              <path
+                d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z" />
+            </svg>
+          </a>
+          <!-- Github -->
+          <a href="https://github.com/Maan-py" target="_blank"
+            class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
+            <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <title>GitHub</title>
+              <path
+                d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+            </svg>
+          </a>
+          <!-- Discord -->
+          <!--            <a href="https://discord.com/invite/5srndgeNa8" target="_blank" class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">-->
+          <!--              <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">-->
+          <!--                <title>Discord</title>-->
+          <!--                <path-->
+          <!--                  d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1252.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />-->
+          <!--              </svg>-->
+          <!--            </a>-->
+          <!-- Steam -->
+          <a href="https://steamcommunity.com/id/MaanPy/" target="_blank"
+            class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
+            <svg role="img" class="fill-current" width="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <title>Steam</title>
+              <path
+                d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z" />
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/muhammadluqmaan" target="_blank"
+            class="w-9 h-9 mr-3 rounded-full flex justify-center items-center border text-white hover:border-primary hover:bg-primary hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24"
+              height="24" viewBox="0 0 24 24">
+              <path fill="#FFFFFF"
+                d="M21,21H17V14.25C17,13.19 15.81,12.31 14.75,12.31C13.69,12.31 13,13.19 13,14.25V21H9V9H13V11C13.66,9.93 15.36,9.24 16.5,9.24C19,9.24 21,11.28 21,13.75V21M7,21H3V9H7V21M5,3A2,2 0 0,1 7,5A2,2 0 0,1 5,7A2,2 0 0,1 3,5A2,2 0 0,1 5,3Z" />
+            </svg>
+          </a>
+        </div>
+        <p class="text-center text-xs font-medium text-slate-500">© 2023 <a
+            href="https://www.instagram.com/muhammad.luqmaan_/" target="_blank" class="font-bold text-primary">Muhammad
+            Luqmaan</a> • All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer End -->
 
-        setTimeout(() => {
-          text.textContent = "Beginner";
-        }, 8000);
-      };
+  <!-- Back to top start -->
+  <a href="#home"
+    class="hidden fixed bottom-4 right-4 z-[9999] h-10 w-10 rounded-full bg-primary p-4 hover:animate-pulse"
+    id="to-top">
+    <span>
+      <img src="dist/img/arrow.png" alt="arrow" class="-rotate-90">
+    </span>
+  </a>
+  <!-- Back to top end -->
+  <script src="dist/js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
 
-      textLoad();
-      setInterval(textLoad, 12000);
-    </script>
-    <script src="dist/js/script.js"></script>
-  </body>
 </html>
