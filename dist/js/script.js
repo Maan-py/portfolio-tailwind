@@ -106,11 +106,11 @@ form.addEventListener("submit", (e) => {
 const text = document.querySelector(".sec-text");
 const textLoad = () => {
   setTimeout(() => {
-    text.textContent = "Student";
+    text.textContent = "Computer Science Student";
   }, 0);
 
   setTimeout(() => {
-    text.textContent = "New Learner";
+    text.textContent = "Junior Front-end Developer";
   }, 4000);
 
   setTimeout(() => {
