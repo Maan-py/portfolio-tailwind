@@ -688,6 +688,10 @@ video {
   margin-top: 0.5rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .block {
   display: block;
 }
@@ -1009,10 +1013,6 @@ video {
   padding-bottom: 15rem;
 }
 
-.pl-8 {
-  padding-left: 2rem;
-}
-
 .pt-10 {
   padding-top: 2.5rem;
 }
@@ -1031,6 +1031,10 @@ video {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.pl-8 {
+  padding-left: 2rem;
 }
 
 .text-center {
@@ -1471,6 +1475,10 @@ video {
 
   .lg\:max-w-full {
     max-width: 100%;
+  }
+
+  .lg\:items-center {
+    align-items: center;
   }
 
   .lg\:rounded-none {
